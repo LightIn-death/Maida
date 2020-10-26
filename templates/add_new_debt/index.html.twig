@@ -8,14 +8,20 @@
 
     {{ form_start(formulaire) }}
 
+
+
     <div>
-        {{ form_label(formulaire.creditor, "Personne endeter") }}
-        {{ form_widget(formulaire.creditor) }}
+        {{ form_label(formulaire.creditors, "Personne endeter") }}
+        {{ form_widget(formulaire.creditors) }}
     </div>
+
+
+
     <div>
         {{ form_label(formulaire.amount, "Montant") }}
         {{ form_widget(formulaire.amount) }}
     </div>
+
 
 
     <div>
@@ -24,9 +30,10 @@
     </div>
 
 
+
     {{ form_end(formulaire) }}
 
 
-
+{#    {{ dump(d) }}#}
 
 {% endblock %}

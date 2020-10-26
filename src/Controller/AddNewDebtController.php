@@ -4,16 +4,15 @@ namespace App\Controller;
 
 
 use App\Entity\Debt;
-use App\Form\DebtType;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
-
-
-
-
 
 class AddNewDebtController extends AbstractController
 {
@@ -24,24 +23,27 @@ class AddNewDebtController extends AbstractController
      */
 
 
-
-
-
     public function index(Request $request): Response
     {
-        //créer une catégorie vide
-        $debt = new Debt();
 
 
-        //créer le formulaire
-        $form = $this->createForm(DebtType::class, $debt);
+        $form = $this->createFormBuilder()
+            ->add('creditors', EntityType::class, [
 
+                'class' => User::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+
+            ])
+            ->add('amount', NumberType::class)
+            ->add('deadline', DateType::class)
+            ->add('save', SubmitType::class, ['label' => 'Creer la dete'])
+            ->getForm();
 
         $form->handleRequest($request);
-//        var_dump($debt);
+//        var_dump($form);
 
 
-        var_dump($debt);
         if ($form->isSubmitted() && $form->isValid()) {
 
 
@@ -49,10 +51,35 @@ class AddNewDebtController extends AbstractController
             $em = $this->getDoctrine()->getManager();
 
 
-
-
             //je dis au manager que je veux garde l'objet en BDD
-            $em->persist($debt);
+
+            $data = $form->getData();
+
+
+            $montant = $data["amount"] / count($data["creditors"]);
+
+
+            foreach (  $data["creditors"] as $e){
+//                var_dump($e);
+
+                $debt = new Debt();
+
+                $debt->setOwner($data["creditors"][0]);
+                $debt->setCreditor($e);
+                $debt->setDeadline($data["deadline"]);
+                $debt->setAmount($montant);
+
+
+                $em->persist($debt);
+
+
+
+            }
+
+
+
+
+//            $em->persist();
 
 
             //je déclenche l'insert
@@ -65,7 +92,7 @@ class AddNewDebtController extends AbstractController
 
 
         return $this->render('add_new_debt/index.html.twig', [
-            "formulaire" => $form->createView()
+            "formulaire" => $form->createView(),
         ]);
     }
 
