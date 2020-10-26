@@ -40,6 +40,11 @@ class Personne
     private $email;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
      * @ORM\OneToMany(targetEntity=Debt::class, mappedBy="owner", orphanRemoval=true)
      */
     private $debts;
@@ -87,6 +92,19 @@ class Personne
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
         return $this;
     }
 
