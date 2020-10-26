@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>On va voir si tu es bien connecté ...</h1>
+        {% if app.user != null %}
+            <img src="https://media1.tenor.com/images/3d190af70cfeea404f796f869f46a3c3/tenor.gif">
+            <h1>ABSOLUMENT MAGNIFIQUE ! Tu es connecté !</h1>
+        {% endif %}
+        {% if app.user == null %}
+            <a href="{{ path('app_login') }}" class="btn btn-info">t pas connecté 😜😜 </a>
+        {% endif %}
+    </div>
+{% endblock %}
