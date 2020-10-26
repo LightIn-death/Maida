@@ -22,13 +22,13 @@ class Debt
     private $id = 1;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="debts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="debts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="debts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="debts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $creditor;
@@ -64,7 +64,7 @@ class Debt
     private $deadline;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Personne::class)
+     * @ORM\ManyToMany(targetEntity=User::class)
      */
     private $tempCreditor;
 
@@ -78,24 +78,24 @@ class Debt
         return $this->id;
     }
 
-    public function getOwner(): ?Personne
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?Personne $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 
         return $this;
     }
 
-    public function getCreditor(): ?Personne
+    public function getCreditor(): ?User
     {
         return $this->creditor;
     }
 
-    public function setCreditor(?Personne $creditor): self
+    public function setCreditor(?User $creditor): self
     {
         $this->creditor = $creditor;
 
@@ -166,14 +166,14 @@ class Debt
     }
 
     /**
-     * @return Collection|Personne[]
+     * @return Collection|User[]
      */
     public function getTempCreditor(): Collection
     {
         return $this->tempCreditor;
     }
 
-    public function addTempCreditor(Personne $tempCreditor): self
+    public function addTempCreditor(User $tempCreditor): self
     {
         if (!$this->tempCreditor->contains($tempCreditor)) {
             $this->tempCreditor[] = $tempCreditor;
@@ -182,7 +182,7 @@ class Debt
         return $this;
     }
 
-    public function removeTempCreditor(Personne $tempCreditor): self
+    public function removeTempCreditor(User $tempCreditor): self
     {
         $this->tempCreditor->removeElement($tempCreditor);
 

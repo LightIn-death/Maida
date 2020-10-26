@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class AddNewDebtController extends AbstractController
 {
     /**
-     * @Route("/add/new/debt", name="add_new_debt")
+     * @Route("/add", name="add_new_debt")
      * @param Request $request
      * @return Response
      */

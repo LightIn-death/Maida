@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Debt;
 use App\Entity\Personne;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,11 +16,11 @@ class DebtType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tempCreditor', EntityType::class, [
-                'class' => Personne::class,
-                'choice_label' => "firstname",
-                'multiple' => true,
-                'expanded' => false,
+            ->add('creditor', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => "name",
+                'multiple' => false,
+                'expanded' => true,
             ])
             ->add('amount')
 //            ->add('accepted')
@@ -27,8 +28,8 @@ class DebtType extends AbstractType
 //            ->add('alreadyRefund')
             ->add('deadline')
             ->add('owner', EntityType::class, [
-                'class' => Personne::class,
-                'choice_label' => "firstname",
+                'class' => User::class,
+                'choice_label' => "name",
                 'multiple' => false,
                 'expanded' => false,
             ])

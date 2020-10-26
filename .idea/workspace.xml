@@ -20,13 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="403f5a96-97d6-473c-9841-11568e212f23" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/migrations/Version20201026174842.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Maida.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Maida.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201026122249.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20201026211007.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201026124421.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201026174842.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AddNewDebtController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AddNewDebtController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/LoginController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Debt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Debt.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Personne.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/DebtType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DebtType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PersonneRepository.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/add_new_debt/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_new_debt/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +42,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -181,6 +189,7 @@
       <workItem from="1603710405190" duration="682000" />
       <workItem from="1603711535300" duration="17242000" />
       <workItem from="1603731204687" duration="3414000" />
+      <workItem from="1603745716925" duration="1570000" />
     </task>
     <servers />
   </component>
