@@ -15,7 +15,7 @@ class DebtType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('creditor', EntityType::class, [
+            ->add('tempCreditor', EntityType::class, [
                 'class' => Personne::class,
                 'choice_label' => "firstname",
                 'multiple' => true,
@@ -26,7 +26,12 @@ class DebtType extends AbstractType
 //            ->add('finished')
 //            ->add('alreadyRefund')
             ->add('deadline')
-//            ->add('owner')
+            ->add('owner', EntityType::class, [
+                'class' => Personne::class,
+                'choice_label' => "firstname",
+                'multiple' => false,
+                'expanded' => false,
+            ])
             ->add('OK', SubmitType::class, [
                 'label' => "Enregistrer"
             ]);

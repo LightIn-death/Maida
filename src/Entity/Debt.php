@@ -19,7 +19,7 @@ class Debt
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $id = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="debts")
@@ -33,6 +33,11 @@ class Debt
      */
     private $creditor;
 
+
+
+
+
+
     /**
      * @ORM\Column(type="float")
      */
@@ -41,12 +46,12 @@ class Debt
     /**
      * @ORM\Column(type="boolean")
      */
-    private $accepted;
+    private $accepted = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $finished;
+    private $finished= false;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -57,6 +62,16 @@ class Debt
      * @ORM\Column(type="date", nullable=true)
      */
     private $deadline;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Personne::class)
+     */
+    private $tempCreditor;
+
+    public function __construct()
+    {
+        $this->tempCreditor = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +101,9 @@ class Debt
 
         return $this;
     }
+
+
+
 
     public function getAmount(): ?float
     {
@@ -143,6 +161,30 @@ class Debt
     public function setDeadline(?\DateTimeInterface $deadline): self
     {
         $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Personne[]
+     */
+    public function getTempCreditor(): Collection
+    {
+        return $this->tempCreditor;
+    }
+
+    public function addTempCreditor(Personne $tempCreditor): self
+    {
+        if (!$this->tempCreditor->contains($tempCreditor)) {
+            $this->tempCreditor[] = $tempCreditor;
+        }
+
+        return $this;
+    }
+
+    public function removeTempCreditor(Personne $tempCreditor): self
+    {
+        $this->tempCreditor->removeElement($tempCreditor);
 
         return $this;
     }
