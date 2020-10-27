@@ -20,6 +20,8 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/registration", name="registration")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
     {

@@ -13,4 +13,19 @@
             <a href="{{ path('app_login') }}" class="btn btn-info">t pas connecté 😜😜 </a>
         {% endif %}
     </div>
+
+
+
+
+    <br>
+
+    <div class="main">
+        <div class="button"><a href="{{ path('add_new_debt') }}">Add Debt</a></div>
+        <div class="button"><a href="{{ path('debt') }}">Pending</a></div>
+        <div class="button"><a href="{{ path('accept') }}">Accept</a></div>
+        <div class="button"><a href="{{ path('debt') }}">Deadline</a></div>
+    </div>
+
+
+
 {% endblock %}

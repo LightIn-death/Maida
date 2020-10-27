@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+
+
 use App\Repository\DebtRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,19 +19,24 @@ class Debt
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $id = 1;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="debts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="debts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="debts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="debts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $creditor;
+
+
+
+
+
 
     /**
      * @ORM\Column(type="float")
@@ -37,12 +46,12 @@ class Debt
     /**
      * @ORM\Column(type="boolean")
      */
-    private $accepted;
+    private $accepted = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $finished;
+    private $finished= false;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -54,34 +63,47 @@ class Debt
      */
     private $deadline;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class)
+     */
+    private $tempCreditor;
+
+    public function __construct()
+    {
+        $this->tempCreditor = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getOwner(): ?Personne
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?Personne $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 
         return $this;
     }
 
-    public function getCreditor(): ?Personne
+    public function getCreditor(): ?User
     {
         return $this->creditor;
     }
 
-    public function setCreditor(?Personne $creditor): self
+    public function setCreditor(?User $creditor): self
     {
         $this->creditor = $creditor;
 
         return $this;
     }
+
+
+
 
     public function getAmount(): ?float
     {
@@ -139,6 +161,30 @@ class Debt
     public function setDeadline(?\DateTimeInterface $deadline): self
     {
         $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getTempCreditor(): Collection
+    {
+        return $this->tempCreditor;
+    }
+
+    public function addTempCreditor(User $tempCreditor): self
+    {
+        if (!$this->tempCreditor->contains($tempCreditor)) {
+            $this->tempCreditor[] = $tempCreditor;
+        }
+
+        return $this;
+    }
+
+    public function removeTempCreditor(User $tempCreditor): self
+    {
+        $this->tempCreditor->removeElement($tempCreditor);
 
         return $this;
     }
