@@ -15,16 +15,9 @@ class DebtController extends AbstractController
     public function index(): Response
     {
 
-
-
-
-
         $pending  = $this->getDoctrine()
             ->getRepository(Debt::class)
-            ->findByNotFinished($this->getUser()->getId());
-
-
-
+            ->findByNotAccepted($this->getUser()->getId());
 
         return $this->render('debt/index.html.twig', [
 
@@ -34,4 +27,24 @@ class DebtController extends AbstractController
 
     }
 
+
+    /**
+     * @Route("/pending/details/{id}", methods={"GET","HEAD"}, name="details")
+     * @param int $id
+     * @return Response
+     */
+    public function details(int $id): Response
+    {
+
+        $details  = $this->getDoctrine()
+            ->getRepository(Debt::class)
+            ->find($id);
+
+        return $this->render('debt/details.html.twig', [
+
+            'details' => $details,
+
+        ]);
+
+    }
 }

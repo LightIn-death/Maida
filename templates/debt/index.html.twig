@@ -5,17 +5,26 @@
 {% block body %}
 
 
-<div class="example-wrapper">
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/src/Controller/DebtController.php'|file_link(0) }}">src/Controller/DebtController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/templates/debt/index.html.twig'|file_link(0) }}">templates/debt/index.html.twig</a></code></li>
-    </ul>
-
-
-
     {{ dump(pending) }}
 
-</div>
+
+
+
+
+    <table>
+        <tr>
+            <th>Dete</th>
+            <th>En vers</th>
+            <th>deja rembourser</th>
+        </tr>
+
+        {% for p in pending %}
+            <tr>
+                <td>{{ p.amount }}€</td>
+                <td>{{ p.owner.name }}</td>
+                <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
+                <td><a href="{{ path('details',{id : p.id}) }}">Acceder a la page de remboursement</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
