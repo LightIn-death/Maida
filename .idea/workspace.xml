@@ -20,11 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="403f5a96-97d6-473c-9841-11568e212f23" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/debt/details.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DebtController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DebtController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/debt/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/debt/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/debt/details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/debt/details.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +178,7 @@
       <workItem from="1603731204687" duration="3414000" />
       <workItem from="1603745716925" duration="6146000" />
       <workItem from="1603880848688" duration="7044000" />
-      <workItem from="1604346727723" duration="3891000" />
+      <workItem from="1604346727723" duration="5687000" />
     </task>
     <servers />
   </component>
@@ -207,5 +205,9 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="414" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1603731269412" />
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604352423914">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1604352423914" />
   </component>
 </project>

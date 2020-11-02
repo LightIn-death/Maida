@@ -18,6 +18,9 @@
 
     <p> Temps restant pour remboursser : {{    date(  details.deadline | date ).diff( date("now") ).format('%a')   }} ( pour le {{ details.deadline | date("d/m/Y") }} )</p>
 
+    {%  if  details.amount - details.alreadyRefund > 0 %}
 
+        {{ form(formulaire) }}
+    {%  endif %}
 
 {% endblock %}
