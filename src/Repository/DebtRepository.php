@@ -53,7 +53,18 @@ class DebtRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByNotAcceptedOwner($id)
+    {
 
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.accepted = false')
+            ->andWhere('d.owner = :id')
+            ->setParameter('id', $id)
+            ->orderBy('d.deadline', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return Debt[] Returns an array of Debt objects

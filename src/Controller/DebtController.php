@@ -22,9 +22,15 @@ class DebtController extends AbstractController
             ->getRepository(Debt::class)
             ->findByNotAccepted($this->getUser()->getId());
 
+
+        $wainting  = $this->getDoctrine()
+            ->getRepository(Debt::class)
+            ->findByNotAcceptedOwner($this->getUser()->getId());
+
         return $this->render('debt/index.html.twig', [
 
             'pending' => $pending,
+            'waiting' => $wainting,
 
         ]);
 
@@ -46,6 +52,9 @@ class DebtController extends AbstractController
         $details  = $this->getDoctrine()
             ->getRepository(Debt::class)
             ->find($id);
+
+
+
 
 
         $form = $this->createFormBuilder()
@@ -82,6 +91,39 @@ class DebtController extends AbstractController
 
 
         ]);
+
+    }
+
+
+    /**
+     * @Route("/pending/delete/{id}", methods={"GET","POST"}, name="delete")
+     * @param int $id
+     * @return Response
+     */
+    public function delete(int $id): Response
+    {
+
+
+
+        $details  = $this->getDoctrine()
+            ->getRepository(Debt::class)
+            ->find($id);
+
+
+        if($details->getOwner()->getId()  == $this->getUser()->getId()){
+
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($details);
+
+            $em->flush();
+
+        }
+
+
+
+        return $this->redirectToRoute('pending');
 
     }
 }

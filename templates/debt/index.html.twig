@@ -9,7 +9,7 @@
 
 
 
-
+<h2>Dete que tu dois au autres</h2>
 
     <table>
         <tr>
@@ -24,6 +24,26 @@
                 <td>{{ p.owner.name }}</td>
                 <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
                 <td><a href="{{ path('details',{id : p.id}) }}">Acceder a la page de remboursement</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+<h2>Dete que l'on te dois</h2>
+
+    <table>
+        <tr>
+            <th>Dete</th>
+            <th>de la part de</th>
+            <th>deja rembourser</th>
+        </tr>
+
+        {% for p in waiting %}
+            <tr>
+                <td>{{ p.amount }}€</td>
+                <td>{{ p.creditor.name }}</td>
+                <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
+                <td><a href="{{ path('delete',{id : p.id}) }}">supprimer</a></td>
             </tr>
         {% endfor %}
     </table>
