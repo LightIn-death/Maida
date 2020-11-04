@@ -19,6 +19,53 @@ class DebtRepository extends ServiceEntityRepository
         parent::__construct($registry, Debt::class);
     }
 
+
+    /**
+     * @param $id
+     * @return Debt[] Returns an array of Debt objects
+     */
+
+    public function findByNotFinished($id)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.accepted = true')
+            ->andWhere('d.finished = false')
+            ->andWhere('d.creditor = :id')
+            ->setParameter('id', $id)
+            ->orderBy('d.deadline', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function findByNotAccepted($id)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.accepted = false')
+            ->andWhere('d.creditor = :id')
+            ->setParameter('id', $id)
+            ->orderBy('d.deadline', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByNotAcceptedOwner($id)
+    {
+
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.accepted = false')
+            ->andWhere('d.owner = :id')
+            ->setParameter('id', $id)
+            ->orderBy('d.deadline', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Debt[] Returns an array of Debt objects
     //  */

@@ -1,20 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DebtController!{% endblock %}
+{% block title %}Pending Debt{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/src/Controller/DebtController.php'|file_link(0) }}">src/Controller/DebtController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/templates/debt/index.html.twig'|file_link(0) }}">templates/debt/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {{ dump(pending) }}
+
+
+
+<h2>Dete que tu dois au autres</h2>
+
+    <table>
+        <tr>
+            <th>Dete</th>
+            <th>En vers</th>
+            <th>deja rembourser</th>
+        </tr>
+
+        {% for p in pending %}
+            <tr>
+                <td>{{ p.amount }}€</td>
+                <td>{{ p.owner.name }}</td>
+                <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
+                <td><a href="{{ path('details',{id : p.id}) }}">Acceder a la page de remboursement</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+<h2>Dete que l'on te dois</h2>
+
+    <table>
+        <tr>
+            <th>Dete</th>
+            <th>de la part de</th>
+            <th>deja rembourser</th>
+        </tr>
+
+        {% for p in waiting %}
+            <tr>
+                <td>{{ p.amount }}€</td>
+                <td>{{ p.creditor.name }}</td>
+                <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
+                <td><a href="{{ path('delete',{id : p.id}) }}">supprimer</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

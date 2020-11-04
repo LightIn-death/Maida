@@ -1,20 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AddNewDebtController!{% endblock %}
+{% block title %}Add Debt !{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Add a new debt</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/src/Controller/AddNewDebtController.php'|file_link(0) }}">src/Controller/AddNewDebtController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/templates/add_new_debt/index.html.twig'|file_link(0) }}">templates/add_new_debt/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {{ form_start(formulaire) }}
+
+
+
+    <div>
+        {{ form_label(formulaire.creditors, "Personne endeter") }}
+        {{ form_widget(formulaire.creditors) }}
+    </div>
+
+
+
+    <div>
+        {{ form_label(formulaire.amount, "Montant") }}
+        {{ form_widget(formulaire.amount) }}
+    </div>
+
+
+
+    <div>
+        {{ form_label(formulaire.deadline, "Date de fin") }}
+        {{ form_widget(formulaire.deadline) }}
+    </div>
+
+
+
+    {{ form_end(formulaire) }}
+
+
+{#    {{ dump(d) }}#}
+
 {% endblock %}
