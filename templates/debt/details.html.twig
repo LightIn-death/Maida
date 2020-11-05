@@ -4,23 +4,27 @@
 
 {% block body %}
 
-
     {{ dump(details) }}
 
+<div class="container">
+
+    <h1>Dette envers <b>{{ details.owner.name }}</b></h1>
+
+    <div class="card card-body">
+
+        <h3>Montant initial : {{ details.amount }}€</h3>
+
+        <h2>Reste à Payer  : <b>{{ details.amount - details.alreadyRefund }}</b>€</h2>
 
 
-    <h3>Dete en vers : {{ details.owner.name }}</h3>
+        <p> Temps restant pour rembourser :
+            <b>{{    date(  details.deadline | date ).diff( date("now") ).format('%a')   }}</b> jours (pour le {{ details.deadline | date("d/m/Y") }})
+        </p>
 
-    <p>Montant initial : {{ details.amount }} </p>
-
-    <h2>Reste a payer  : {{ details.amount - details.alreadyRefund }} </h2>
-
-
-    <p> Temps restant pour remboursser : {{    date(  details.deadline | date ).diff( date("now") ).format('%a')   }} ( pour le {{ details.deadline | date("d/m/Y") }} )</p>
-
-    {%  if  details.amount - details.alreadyRefund > 0 %}
-
-        {{ form(formulaire) }}
-    {%  endif %}
+        {%  if  details.amount - details.alreadyRefund > 0 %}
+            {{ form(formulaire) }}
+        {%  endif %}
+    </div>
+</div>
 
 {% endblock %}

@@ -1,37 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add Debt !{% endblock %}
+{% block title %}Ajouter une Dette{% endblock %}
 
 {% block body %}
 
-    <h1>Add a new debt</h1>
+    <div class="container">
 
-    {{ form_start(formulaire) }}
+        <h1><i class="far fa-plus-square"></i> Ajouter une nouvelle dette</h1>
 
+        {{ form_start(formulaire) }}
 
+        <form>
+            <div class="form-group">
+                {{ form_label(formulaire.creditors, "Personne Endettée") }}
+                {{ form_widget(formulaire.creditors) }}
+            </div>
 
-    <div>
-        {{ form_label(formulaire.creditors, "Personne endeter") }}
-        {{ form_widget(formulaire.creditors) }}
+            <div class="form-group">
+                {{ form_label(formulaire.amount, "Montant") }}
+                {{ form_widget(formulaire.amount) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(formulaire.deadline, "Date de fin") }}
+                {{ form_widget(formulaire.deadline) }}
+            </div>
+            {{ form_end(formulaire) }}
+        </form>
+
     </div>
-
-
-
-    <div>
-        {{ form_label(formulaire.amount, "Montant") }}
-        {{ form_widget(formulaire.amount) }}
-    </div>
-
-
-
-    <div>
-        {{ form_label(formulaire.deadline, "Date de fin") }}
-        {{ form_widget(formulaire.deadline) }}
-    </div>
-
-
-
-    {{ form_end(formulaire) }}
 
 
 {#    {{ dump(d) }}#}

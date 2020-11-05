@@ -13,24 +13,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class DebtController extends AbstractController
 {
     /**
-     * @Route("/pending", name="pending")
+     * @Route("/dettes", name="dettes")
      */
     public function index(): Response
     {
 
-        $pending  = $this->getDoctrine()
+        $toReimbruse  = $this->getDoctrine()
+            ->getRepository(Debt::class)
+            ->findByToPay($this->getUser()->getId());
+
+        $waiting  = $this->getDoctrine()
+            ->getRepository(Debt::class)
+            ->findByGetPaid($this->getUser()->getId());
+
+        $toValidate  = $this->getDoctrine()
             ->getRepository(Debt::class)
             ->findByNotAccepted($this->getUser()->getId());
 
-
-        $wainting  = $this->getDoctrine()
-            ->getRepository(Debt::class)
-            ->findByNotAcceptedOwner($this->getUser()->getId());
-
         return $this->render('debt/index.html.twig', [
 
-            'pending' => $pending,
-            'waiting' => $wainting,
+            'toReimburse' => $toReimbruse,
+            'waiting' => $waiting,
+            'toValidate' => $toValidate,
 
         ]);
 
@@ -38,7 +42,7 @@ class DebtController extends AbstractController
 
 
     /**
-     * @Route("/pending/details/{id}", methods={"GET","POST"}, name="details")
+     * @Route("/dettes/details/{id}", methods={"GET","POST"}, name="details")
      * @param int $id
      * @param Request $request
      * @return Response
@@ -53,20 +57,15 @@ class DebtController extends AbstractController
             ->getRepository(Debt::class)
             ->find($id);
 
-
-
-
-
         $form = $this->createFormBuilder()
-            ->add('newAmount', NumberType::class ,['label' => "Ajouter de l'argent   :"])
-            ->add('save', SubmitType::class, ['label' => 'Ajouter'])
+            ->add('newAmount', NumberType::class ,['label' => "Payer un montant : "])
+            ->add('save', SubmitType::class, ['label' => 'Payer'])
             ->getForm();
 
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-
 
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
@@ -89,29 +88,23 @@ class DebtController extends AbstractController
             'details' => $details,
             'formulaire' => $form->createView(),
 
-
         ]);
 
     }
 
 
     /**
-     * @Route("/pending/delete/{id}", methods={"GET","POST"}, name="delete")
+     * @Route("/dettes/delete/{id}", methods={"GET","POST"}, name="delete")
      * @param int $id
      * @return Response
      */
     public function delete(int $id): Response
     {
-
-
-
-        $details  = $this->getDoctrine()
+     $details  = $this->getDoctrine()
             ->getRepository(Debt::class)
             ->find($id);
 
-
         if($details->getOwner()->getId()  == $this->getUser()->getId()){
-
 
             $em = $this->getDoctrine()->getManager();
 
@@ -120,10 +113,29 @@ class DebtController extends AbstractController
             $em->flush();
 
         }
-
-
-
         return $this->redirectToRoute('pending');
+    }
 
+    /**
+     * @Route("/dettes/validate/{id}", methods={"GET","POST"}, name="validate")
+     * @param int $id
+     * @return Response
+     */
+    public function validate(int $id): Response
+    {
+        $details  = $this->getDoctrine()
+            ->getRepository(Debt::class)
+            ->find($id);
+
+        if($details->getCreditor()->getId()  == $this->getUser()->getId()){
+
+            $em = $this->getDoctrine()->getManager();
+
+            $details->setAccepted('1');
+
+            $em->flush();
+
+        }
+        return $this->redirectToRoute('pending');
     }
 }
