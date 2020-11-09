@@ -3,17 +3,21 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
+
     <div class="container">
+        <img src="{{ asset('img/maida_black.png') }}" id="maida_dashboard">
+        <h2 id="logo_comment"><i>Gestionnaire de Dettes</i></h2>
+        <hr>
+        <h1>Bienvenue sur Maida !</h1>
+        <br>
         {% if app.user != null %}
-            <img src="https://media1.tenor.com/images/3d190af70cfeea404f796f869f46a3c3/tenor.gif">
-            <h1>ABSOLUMENT MAGNIFIQUE ! Tu es connecté !</h1>
+
         {% endif %}
         {% if app.user == null %}
-            <h1>Bienvenue sur Maida !</h1>
             <h3>Pour continuer, veuillez vous <b>inscrire</b> ou vous <b>connecter</b>.</h3>
 
-            <a href="{{ path('registration') }}"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i> S'Inscrire</button></a>
-            <a href="{{ path('app_login') }}"><button type="button" class="btn btn-info"><i class="fas fa-sign-in-alt"></i> Se Connecter</button></a>
+            <a href="{{ path('registration') }}"><button type="button" class="btn btn-success btn-lg"><i class="fas fa-user-edit"></i> S'Inscrire</button></a>
+            <a href="{{ path('app_login') }}"><button type="button" class="btn btn-info btn-lg"><i class="fas fa-sign-in-alt"></i> Se Connecter</button></a>
         {% endif %}
     </div>
 
