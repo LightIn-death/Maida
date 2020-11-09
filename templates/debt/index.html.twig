@@ -1,20 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DebtController!{% endblock %}
+{% block title %}Dettes en cours{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/src/Controller/DebtController.php'|file_link(0) }}">src/Controller/DebtController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Breval Nouveau/Nextcloud/cours/symfony/Maida/templates/debt/index.html.twig'|file_link(0) }}">templates/debt/index.html.twig</a></code></li>
-    </ul>
+    <h1>Dettes en Cours</h1>
+    <br>
+
+    <h2><i class="fas fa-hand-holding-usd"></i> Dettes à <b>rembourser</b></h2>
+
+        <table  class="table">
+            {% if toReimburse is not empty%}
+                <thead class="thead-light">
+                <th>Montant</th>
+                <th>Envers</th>
+                <th>Remboursé</th>
+                <th>Paiement</th>
+                </thead>
+                {% for p in toReimburse %}
+                <tr>
+                    <td>{{ p.amount }}€</td>
+                    <td>{{ p.owner.name }}</td>
+                    <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
+                    <td><a href="{{ path('details',{id : p.id}) }}">
+                            <button type="button" class="btn btn-outline-warning"><i class="fas fa-euro-sign"></i> Rembourser</button>
+                    </a></td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <h3><i>Aucune dette à rembourser</i></h3>
+            {% endif %}
+        </table>
+
+    <hr>
+
+    <h2><i class="fas fas fa-hand-holding-heart"></i> Dettes <b>dûes</b></h2>
+
+        <table class="table">
+
+            {% if waiting is not empty %}
+                <thead class="thead-light">
+                <th>Montant</th>
+                <th>Par</th>
+                <th>% Remboursé</th>
+                <th>Supprimer</th>
+                </thead>
+                {% for p in waiting %}
+                    <tr>
+                        <td>{{ p.amount }}€</td>
+                        <td>{{ p.creditor.name }}</td>
+                        <td>{{ p.alreadyRefund / p.amount * 100 }}%</td>
+                        <td><a href="{{ path('delete',{id : p.id}) }}">
+                                <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                        </a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <h3><i>Aucune dette dûe</i></h3>
+            {% endif %}
+        </table>
+
+    <hr>
+
+    <h2><i class="fas fa-clipboard-check"></i> Dettes à <b>valider</b></h2>
+
+    <table class="table">
+        {% if toValidate is not empty %}
+            <thead class="thead-light">
+            <th>Montant</th>
+            <th>De</th>
+            <th>Valider</th>
+            </thead>
+            {% for p in toValidate %}
+                    <tr>
+                        <td>{{ p.amount }}€</td>
+                        <td>{{ p.owner.name }}</td>
+                        <td><a href="{{ path('validate',{id : p.id}) }}">
+                                <button type="button" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+                            </a></td>
+                    </tr>
+            {% endfor %}
+        {% else %}
+            <h3><i>Aucune dette à valider</i></h3>
+        {% endif %}
+    </table>
+
 </div>
 {% endblock %}

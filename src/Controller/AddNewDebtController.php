@@ -37,7 +37,7 @@ class AddNewDebtController extends AbstractController
             ])
             ->add('amount', NumberType::class)
             ->add('deadline', DateType::class)
-            ->add('save', SubmitType::class, ['label' => 'Creer la dete'])
+            ->add('save', SubmitType::class, ['label' => 'Créer la dette'])
             ->getForm();
 
         $form->handleRequest($request);
@@ -64,7 +64,7 @@ class AddNewDebtController extends AbstractController
 
                 $debt = new Debt();
 
-                $debt->setOwner($data["creditors"][0]);
+                $debt->setOwner($this->getUser());
                 $debt->setCreditor($e);
                 $debt->setDeadline($data["deadline"]);
                 $debt->setAmount($montant);
@@ -76,18 +76,10 @@ class AddNewDebtController extends AbstractController
 
             }
 
-
-
-
-//            $em->persist();
-
-
             //je déclenche l'insert
             $em->flush();
 
-
             return $this->redirectToRoute('dashboard');
-
         }
 
 
@@ -98,15 +90,6 @@ class AddNewDebtController extends AbstractController
 
 
 }
-
-
-
-
-
-
-
-
-
 
 //        if (array_key_exists("debt", $request->request->all())) {
 

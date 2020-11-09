@@ -4,26 +4,22 @@
 
 {% block body %}
     <div class="container">
-        <h1>On va voir si tu es bien connecté ...</h1>
         {% if app.user != null %}
             <img src="https://media1.tenor.com/images/3d190af70cfeea404f796f869f46a3c3/tenor.gif">
             <h1>ABSOLUMENT MAGNIFIQUE ! Tu es connecté !</h1>
         {% endif %}
         {% if app.user == null %}
-            <a href="{{ path('app_login') }}" class="btn btn-info">t pas connecté 😜😜 </a>
+            <h1>Bienvenue sur Maida !</h1>
+            <h3>Pour continuer, veuillez vous <b>inscrire</b> ou vous <b>connecter</b>.</h3>
+
+            <a href="{{ path('registration') }}"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i> S'Inscrire</button></a>
+            <a href="{{ path('app_login') }}"><button type="button" class="btn btn-info"><i class="fas fa-sign-in-alt"></i> Se Connecter</button></a>
         {% endif %}
     </div>
-
-
-
 
     <br>
 
     <div class="main">
-        <div class="button"><a href="{{ path('add_new_debt') }}">Add Debt</a></div>
-        <div class="button"><a href="{{ path('debt') }}">Pending</a></div>
-        <div class="button"><a href="{{ path('accept') }}">Accept</a></div>
-        <div class="button"><a href="{{ path('debt') }}">Deadline</a></div>
     </div>
 
 
