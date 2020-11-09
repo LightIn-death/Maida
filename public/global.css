@@ -1,0 +1,36 @@
+body {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/triangle-mosaic.png");
+}
+
+.container {
+    margin: 2vh auto;
+    text-align: center;
+    background-color: whitesmoke;
+    padding: 2vh 3vw 2vh 3vw;
+}
+
+h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 3em;
+    margin-bottom: 1vh;
+}
+
+/* Gestion des Images*/
+#maida_navbrand {
+    max-height: 3vh;
+}
+
+#maida_dashboard {
+    max-width: 80%;
+}
+
+
+#logo_comment {
+    color: #6E6E6E;
+}
+/* Formulaires */
+#lform {
+    margin: auto;
+    text-align: left;
+    width: 50%;
+}
