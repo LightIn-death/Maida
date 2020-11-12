@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending Debt{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1>Dette envers <b>{{ details.owner.name }}</b></h1>
+
+    <div class="card card-body">
+
+        <h3>Montant initial : {{ details.amount }}€</h3>
+
+        <h2>Reste à Payer  : <b>{{ details.amount - details.alreadyRefund }}</b>€</h2>
+
+
+        <p> Temps restant pour rembourser :
+            <b>{{    date(  details.deadline | date ).diff( date("now") ).format('%a')   }}</b> jours (pour le {{ details.deadline | date("d/m/Y") }})
+        </p>
+
+        {%  if  details.amount - details.alreadyRefund > 0 %}
+            {{ form(formulaire) }}
+        {%  endif %}
+    </div>
+</div>
+
+{% endblock %}
