@@ -34,3 +34,9 @@ h1 {
     text-align: left;
     width: 50%;
 }
+footer {
+    color: whitesmoke;
+    background-color: #343A40;
+    position: fixed;
+    bottom: 60px;
+}
