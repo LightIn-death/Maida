@@ -113,7 +113,7 @@ class DebtController extends AbstractController
             $em->flush();
 
         }
-        return $this->redirectToRoute('pending');
+        return $this->redirectToRoute('dettes');
     }
 
     /**
@@ -136,6 +136,6 @@ class DebtController extends AbstractController
             $em->flush();
 
         }
-        return $this->redirectToRoute('pending');
+        return $this->redirectToRoute('dettes');
     }
 }
